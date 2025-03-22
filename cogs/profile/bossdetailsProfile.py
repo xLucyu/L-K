@@ -42,10 +42,10 @@ def tierfilter(bossHpMultiplier: int, bossIndex: dict, eventData: dict, players:
 
     for tier, hp in enumerate(bossIndex["TierHP"], start=1):
         
-        baseHp = hp * healthMultiplierMode[players] * bossHpMultiplier
-        phaseHp = baseHp / (skullMultiplier * shieldHpMultiplier) if shieldHpMultiplier != 1 else 0
-        totalHp = round(baseHp + phaseHp * skullMultiplier)
-        skullHp = round(totalHp / skullMultiplier)
+        baseHp = hp * bossHpMultiplier * healthMultiplierMode[players] 
+        totalHp = baseHp * shieldHpMultiplier
+        skullHp = round(totalHp / skulls) 
+        
         eventData[f"Tier {tier}"] = [
         f"""
         <:Lives:{emojis.get('Lives')}> TotalHP: {int(totalHp):,}HP
